@@ -1,0 +1,243 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+  
+  body {
+    @apply font-sans antialiased bg-cream-50 text-coffee-900;
+    overflow-x: hidden;
+  }
+}
+
+@layer components {
+  /* Responsive Container */
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .section-container-wide {
+    @apply max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12;
+  }
+  
+  /* Coffee steam animation */
+  .steam {
+    position: absolute;
+    height: 80px;
+    width: 8px;
+    background: linear-gradient(to top, rgba(255,255,255,0.8), transparent);
+    border-radius: 50%;
+    filter: blur(8px);
+    animation: steam 4s ease-in-out infinite;
+  }
+  
+  @media (min-width: 768px) {
+    .steam {
+      height: 100px;
+      width: 10px;
+    }
+  }
+  
+  .steam:nth-child(1) {
+    left: 30%;
+    animation-delay: 0s;
+  }
+  
+  .steam:nth-child(2) {
+    left: 50%;
+    animation-delay: 1s;
+  }
+  
+  .steam:nth-child(3) {
+    left: 70%;
+    animation-delay: 2s;
+  }
+  
+  /* Texture overlay */
+  .texture-overlay {
+    background-image: 
+      repeating-linear-gradient(
+        0deg,
+        rgba(0,0,0,0.03) 0px,
+        transparent 1px,
+        transparent 2px,
+        rgba(0,0,0,0.03) 3px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        rgba(0,0,0,0.03) 0px,
+        transparent 1px,
+        transparent 2px,
+        rgba(0,0,0,0.03) 3px
+      );
+  }
+  
+  /* Paper texture */
+  .paper-texture {
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+  }
+  
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #977669 0%, #d2bab0 50%, #977669 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 3s ease infinite;
+  }
+  
+  @keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  
+  /* Responsive Button styles */
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 bg-coffee-700 text-cream-50 font-semibold rounded-full transition-all duration-300 hover:bg-coffee-800 hover:shadow-2xl hover:-translate-y-1 active:translate-y-0 text-sm sm:text-base;
+  }
+  
+  .btn-outline {
+    @apply inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 border-2 border-coffee-700 text-coffee-700 font-semibold rounded-full transition-all duration-300 hover:bg-coffee-700 hover:text-cream-50 hover:shadow-xl text-sm sm:text-base;
+  }
+  
+  /* Responsive Card styles */
+  .menu-card {
+    @apply relative bg-white rounded-2xl p-4 sm:p-6 shadow-lg border border-coffee-100 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 overflow-hidden;
+  }
+  
+  .menu-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #977669, #d2bab0, #977669);
+    background-size: 200% 100%;
+    opacity: 0;
+    transition: opacity 0.3s;
+    animation: gradientMove 3s ease infinite;
+  }
+  
+  @keyframes gradientMove {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  
+  .menu-card:hover::before {
+    opacity: 1;
+  }
+  
+  /* Image containers */
+  .image-container {
+    @apply relative overflow-hidden rounded-2xl lg:rounded-3xl;
+  }
+  
+  .image-container img {
+    @apply w-full h-full object-cover transition-transform duration-700;
+  }
+  
+  .image-container:hover img {
+    @apply scale-110;
+  }
+  
+  /* Parallax effect */
+  .parallax-bg {
+    @apply bg-fixed bg-center bg-cover;
+  }
+  
+  @media (max-width: 768px) {
+    .parallax-bg {
+      @apply bg-scroll;
+    }
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-cream-100;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-coffee-400 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-coffee-500;
+  }
+  
+  /* Glassmorphism */
+  .glass {
+    @apply bg-white/10 backdrop-blur-md border border-white/20;
+  }
+  
+  .glass-dark {
+    @apply bg-coffee-900/10 backdrop-blur-md border border-coffee-900/20;
+  }
+}
+
+@layer utilities {
+  .text-shadow {
+    text-shadow: 2px 2px 4px rgba(67, 48, 43, 0.1);
+  }
+  
+  .text-shadow-lg {
+    text-shadow: 4px 4px 8px rgba(67, 48, 43, 0.2);
+  }
+  
+  /* Animation delays */
+  .animation-delay-100 { animation-delay: 0.1s; }
+  .animation-delay-200 { animation-delay: 0.2s; }
+  .animation-delay-300 { animation-delay: 0.3s; }
+  .animation-delay-400 { animation-delay: 0.4s; }
+  .animation-delay-500 { animation-delay: 0.5s; }
+  .animation-delay-600 { animation-delay: 0.6s; }
+  .animation-delay-700 { animation-delay: 0.7s; }
+  .animation-delay-800 { animation-delay: 0.8s; }
+  .animation-delay-1000 { animation-delay: 1s; }
+  
+  /* Responsive text sizes */
+  .text-responsive-xs {
+    @apply text-xs sm:text-sm md:text-base;
+  }
+  
+  .text-responsive-sm {
+    @apply text-sm sm:text-base md:text-lg;
+  }
+  
+  .text-responsive-base {
+    @apply text-base sm:text-lg md:text-xl;
+  }
+  
+  .text-responsive-lg {
+    @apply text-lg sm:text-xl md:text-2xl;
+  }
+  
+  .text-responsive-xl {
+    @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl;
+  }
+  
+  .text-responsive-2xl {
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl;
+  }
+  
+  .text-responsive-3xl {
+    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl;
+  }
+  
+  /* Hide scrollbar */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
